@@ -19,6 +19,6 @@ class Room extends Model
     }
 
     protected $fillable = [
-        'name', 'stream_key', 'status','user_id',
+        'name', 'stream_key', 'status','user_id','image','desc'
     ];
 }

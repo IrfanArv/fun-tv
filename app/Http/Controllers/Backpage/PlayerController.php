@@ -21,6 +21,13 @@ class PlayerController extends Controller
         $this->middleware('permission:player-delete', ['only' => ['destroy']]);
     }
 
+    public function index(Request $request)
+    {
+        $data = Player::orderBy('id', 'ASC')->paginate(10);
+        return view('pages.backpage.player.main', compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 10);
+    }
+
     public function player_by_rooms(Request $request)
     {
         $id_room = $request->id;
@@ -43,8 +50,7 @@ class PlayerController extends Controller
             'email' => $request->email,
             'password'=> $request->password,
             'trivia_status'=> 0,
-            'trivia_score'=> 0,
-            'room_id' => $request->room_id
+            'trivia_score'=> 0
         ];
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);

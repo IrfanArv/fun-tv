@@ -358,6 +358,7 @@
                 $('#ajax-question-modal').modal('show');
                 $('#modal-preview').attr('src', 'https://via.placeholder.com/350');
             });
+            
             $('body').on('click', '.edit-user', function() {
                 var user_id = $(this).data('id');
                 $.ajax({

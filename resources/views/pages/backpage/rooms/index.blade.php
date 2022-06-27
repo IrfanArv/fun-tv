@@ -38,7 +38,6 @@
                                 <thead>
                                   <tr>
                                     <th class="f-22">Name</th>
-                                    <th>Players</th>
                                     <th>Trivia Quiz</th>
                                     <th>Create By</th>
                                     <th class="text-center">Actions</th>
@@ -47,16 +46,21 @@
                                 <tbody>
                                   @foreach ($data as $key => $room)
                                       <tr>
-                                          <td>
-                                            {{$room->name}}
-                                            <br>
-                                            {{$room->stream_key}}
-                                          </td>
-                                          @php
-                                            $playerList = App\Models\Player::where('room_id', '=', $room->id)->get();
-                                            $playerTotal = $playerList->count();
-                                          @endphp
-                                            <td><a href="{{ route('players_by_room',$room->id) }}" target="_blank" class="btn btn-sm btn-outline-success">({{$playerTotal}}) Players</a> </td>
+                                        <td>
+                                          <div class="d-inline-block align-middle">
+                                              @if($room->image)
+                                              <img id="preview" class="img-90 m-r-15 align-top" src="{{ ('/img/room/'.$room->image) }}" alt="{{ $room->name }}">
+                                              @else
+                                              <img id="preview" src="https://via.placeholder.com/150" class="img-90 m-r-15 align-top hidden">
+                                              @endif
+                                              <div class="status-circle bg-primary"></div>
+                                              <div class="d-inline-block"><span>{{ $room->name }}</span>
+                                                <p class="font-roboto">
+                                                  {{ $room->stream_key}}
+                                                </p>
+                                              </div>
+                                          </div>
+                                      </td>
                                           @php
                                             $questionList = App\Models\Question::where('room_id', '=', $room->id)->get();
                                             $questionTotal = $questionList->count();

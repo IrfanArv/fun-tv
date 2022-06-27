@@ -1,0 +1,171 @@
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Barlow', sans-serif;
+}
+
+.username {
+    display: flex;
+}
+
+.icon {
+    width: 32px;
+}
+
+img.img-fluid.full_logo {
+    width: 32px;
+}
+
+img.img-fluid.list_logo {
+    width: 45px;
+}
+
+a.full-btn {
+    position: absolute;
+    bottom: 15px;
+    right: -380px;
+}
+
+.viewer-count {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.card {
+    border-radius: 8px !important;
+    border-color: transparent !important;
+}
+
+.card-banner-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+p.content-banner {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #FFFFFF;
+}
+
+.greetings {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 87px;
+    text-align: center;
+    color: #FFA81D;
+}
+
+input#phone,input#username {
+    color: #97248C;
+}
+
+input#phone,input#username:focus {
+    color: #97248C;
+    border: 1px solid #97248C;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(239, 104, 214, 0.6);
+    outline: 0 none;
+}
+
+button.btn.btn-lg.btn-auth {
+    background-color: #97248C;
+    border-radius: 0;
+    padding: 20px;
+    border: 1px solid #97248C;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(239, 104, 214, 0.6);
+    outline: 0 none;
+    color: #FFFFFF;
+}
+
+span.help {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #717171;
+}
+
+.title-otp {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #97248C;
+}
+
+button.btn.btn-help.d-flex.justify-content-center.mx-auto.mt-1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #97248C;
+}
+
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn-upload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 5px 5px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+button.btn.btn-upload {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: #97248C;
+}
+
+
+.img-80 {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+}

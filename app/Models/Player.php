@@ -19,11 +19,8 @@ class Player extends Authenticable
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function room(){
-        return $this->belongsTo(Room::class);
-    }
     protected $fillable = [
-        'name', 'room_id', 'email', 'password', 'trivia_status', 'trivia_score'
+        'name', 'email', 'password', 'trivia_status', 'trivia_score','phone','otp','username','image'
     ];
 
     protected $hidden = [

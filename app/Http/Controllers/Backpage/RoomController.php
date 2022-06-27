@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backpage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Room;
-use App\Models\Question;
 use Auth;
 
 class RoomController extends Controller
@@ -23,7 +22,7 @@ class RoomController extends Controller
         $data = Room::orderBy('id', 'ASC')->paginate(10);
         $user = Auth::user();
         $user->load('question');
-        return view('pages.backpage.rooms.index', compact('data','user'))
+        return view('pages.backpage.rooms.index', compact('data', 'user'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
@@ -38,16 +37,28 @@ class RoomController extends Controller
             'name' => 'required',
             'stream_key' => 'required'
         ]);
-
-
-        $input = [
-            'name' => $request->name,
-            'stream_key' => $request->stream_key,
-            'status' => $request->status,
-            'user_id' => Auth::user()->id
-        ];
+        if ($request->hasFile('image')) {
+            $imageName = date('YmdHis') . "." . $request->image->getClientOriginalExtension();
+            $destinationPath = 'img/room/';
+            $request->file('image')->move($destinationPath, $imageName);
+            $input = [
+                'name' => $request->name,
+                'stream_key' => $request->stream_key,
+                'status' => 1,
+                'user_id' => Auth::user()->id,
+                'desc' => $request->desc,
+                'image' => date('YmdHis') . "." . $request->image->getClientOriginalExtension()
+            ];
+        } else {
+            $input = [
+                'name' => $request->name,
+                'stream_key' => $request->stream_key,
+                'status' => 1,
+                'user_id' => Auth::user()->id,
+                'desc' => $request->desc,
+            ];
+        }
         Room::create($input);
-
         return redirect()->route('rooms.index')
             ->with('success', 'New Room Stream created successfully');
     }

@@ -7,17 +7,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('players/login', 'Auth\PlayerAuthController@getLogin')->name('players.login');
 Route::post('players/login', 'Auth\PlayerAuthController@postLogin');
 Route::post('players/logout', 'Auth\PlayerAuthController@postLogout')->name('players.logout');
+Route::get('players/register', 'Auth\PlayerAuthController@getRegister')->name('players.register');
+Route::post('players/register', 'Auth\PlayerAuthController@postRegister');
+// otp
+Route::get('get-otp', 'Auth\PlayerAuthController@getOTP')->name('players.otp');
+Route::post('get-otp', 'Auth\PlayerAuthController@postOTP');
+Route::post('update-profile', 'MainController@updateProfile')->name('players.update');
+Route::post('available-user', 'MainController@user_check');
+Route::post('save-profile', 'MainController@saveProfile');
+Route::get('/', 'MainController@index')->name('home');
 
-
-Route::middleware('auth:players')->group(function(){
-    Route::get('/', 'MainController@index');
-    // Route::get('/', function () {
-    //     PushQuiz::dispatch('hello');
-    //     return 'MainController@index';
-    // });
-});
-
-
+// Route::middleware('auth:players')->group(function(){
+//     Route::get('/watch', 'MainController@watch');
+// });
 
 Auth::routes();
 Route::group([
@@ -29,11 +31,13 @@ Route::group([
     Route::resource('roles', Backpage\RoleController::class);
     Route::resource('users', Backpage\UserController::class);
     Route::resource('rooms', Backpage\RoomController::class);
+    Route::get('/players', 'Backpage\PlayerController@index');
+    // Route::resource('playres', Backpage\PlayerController::class);
     // Route::resource('trivia-quiz', Backpage\QuestionController::class);
     // quiz by rooms
     Route::get('/rooms/trivia-quiz/{id}', 'Backpage\QuestionController@question_by_rooms')->name('quiz_by_room');
     // players by rooms
-    Route::get('/rooms/players/{id}', 'Backpage\PlayerController@player_by_rooms')->name('players_by_room');
+    // Route::get('/rooms/players/{id}', 'Backpage\PlayerController@player_by_rooms')->name('players_by_room');
     // save player
     Route::post('players/store', 'Backpage\PlayerController@store');
     // question

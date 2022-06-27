@@ -29,20 +29,10 @@
                                     aria-labelledby="collapseicon" data-parent="#accordionoc">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-xl-4 ps-0 col-md-6 col-sm-6">
-                                                <div class="media p-0">
-                                                    @php
-                                                        $playerList = App\Models\Player::where('room_id', '=', $room->id)->get();
-                                                        $playerTotal = $playerList->count();
-                                                        $questionList = App\Models\Question::where('room_id', '=', $room->id)->get();
-                                                        $questionTotal = $questionList->count();
-                                                    @endphp
-                                                    <div class="media-body">
-                                                        <h6>Players</h6>
-                                                        <p>{{ $playerTotal }} Players</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @php
+                                            $questionList = App\Models\Question::where('room_id', '=', $room->id)->get();
+                                            $questionTotal = $questionList->count();
+                                        @endphp
                                             <div class="col-xl-4 col-md-6 col-sm-6">
                                                 <div class="media p-0">
                                                     <div class="media-body">

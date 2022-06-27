@@ -10,13 +10,14 @@
         <div id="sidebar-menu">
           <ul class="sidebar-links" id="simple-bar">
             <li class="back-btn">
-              <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+              <div class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
             </li>
-            <li class="sidebar-list "><a class="sidebar-link sidebar-title link-nav {{ Request::segment(2) === 'dashboard' ? 'active' : null }}" href="{{ url('/dashboard') }}"><i data-feather="home"></i><span>Dashboard</span></a></li>
-            <li class="sidebar-list "><a class="sidebar-link sidebar-title link-nav {{ Request::segment(2) === 'rooms' ? 'active' : null }}" href="{{ url('/dashboard/rooms') }}"><i data-feather="tv"></i><span>Stream Rooms</span></a></li>
-            {{-- <li class="sidebar-list "><a class="sidebar-link sidebar-title link-nav {{ Request::segment(2) === 'trivia-quiz' ? 'active' : null }}" href="{{ url('/dashboard/trivia-quiz') }}"><i data-feather="umbrella"></i><span>Trivia Quiz</span></a></li> --}}
-            <li class="sidebar-list"><a class="nav-link sidebar-title" href="#"><i data-feather="users"></i><span>Users</span></a>
+            <li class="sidebar-list "><a class="sidebar-link sidebar-title link-nav {{ Request::segment(2) === 'dashboard' ? 'active' : null }}" href="{{ url('/dashboard') }}"><i data-feather="home"></i>Dashboard</a></li>
+            <li class="sidebar-list "><a class="sidebar-link sidebar-title link-nav {{ Request::segment(2) === 'rooms' ? 'active' : null }}" href="{{ url('/dashboard/rooms') }}"><i data-feather="tv"></i>Stream Rooms</a></li>
+            {{-- <li class="sidebar-list "><a class="sidebar-link sidebar-title link-nav {{ Request::segment(2) === 'trivia-quiz' ? 'active' : null }}" href="{{ url('/dashboard/trivia-quiz') }}"><i data-feather="umbrella"></i>Trivia Quiz</a></li> --}}
+            <li class="sidebar-list"><a class="nav-link sidebar-title" href="#"><i data-feather="users"></i>Users</a>
               <ul class="sidebar-submenu">
+                <li><a class="submenu-title {{ Request::segment(2) === 'players' ? 'active' : null }}"" href="{{ url('/dashboard/players')}}">Players<span class="sub-arrow"></span></a></li>
                 <li><a class="submenu-title {{ Request::segment(2) === 'users' ? 'active' : null }}"" href="{{ url('/dashboard/users')}}">Users<span class="sub-arrow"></span></a></li>
                 <li><a class="submenu-title {{ Request::segment(2) === 'roles' ? 'active' : null }}"" href="{{ url('/dashboard/roles')}}">Roles<span class="sub-arrow"></span></a></li>
               </ul>
