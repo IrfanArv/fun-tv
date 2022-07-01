@@ -32,10 +32,7 @@ window.Echo = new Echo({
 });
 
 // quiz
-// window.Echo.channel('triviaquiz').listen('PushQuiz', (event) => {
-//     console.log('test push quiz ini mah');
-//     console.log(event);
-// });
+
 
 // window.Laravel = {'csrfToken': '{{csrf_token()}}'}
 
@@ -49,9 +46,9 @@ window.Echo = new Echo({
 //      alert(e.room);
 // });
 
-window.Laravel = {'csrfToken': '{{csrf_token()}}'}
-window.Echo.channel('room.{{Auth::guard("players")->user()->room_id}}')
-.listen('room.stream', (e) => {
-    console.log(e);
-    console.log("It is working!");
-});
+// window.Laravel = {'csrfToken': '{{csrf_token()}}'}
+// window.Echo.channel('room.{{Auth::guard("players")->user()->room_id}}')
+// .listen('room.stream', (e) => {
+//     console.log(e);
+//     console.log("It is working!");
+// });

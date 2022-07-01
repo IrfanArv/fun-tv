@@ -27,7 +27,6 @@ class Dashboard extends Controller
     {
         $quest = Question::find($id);
         $detailQuestion = Question_details::where('question_id', $id)->get();
-        $room_id = $quest->room_id;
         $get_time = $quest->time;
         $date_start     = date('Y-m-d H:i:s');
         $date_end       = date('Y-m-d H:i:s', strtotime("+$get_time min"));
@@ -37,7 +36,7 @@ class Dashboard extends Controller
             'status' => 2,
         ];
         $quest->update($data);
-        event(new PushQuiz($room_id, $quest, $detailQuestion));
+        event(new PushQuiz($quest, $detailQuestion));
         return response()->json(array(
             'waktu_quiz' => $date_end,
             'status' => TRUE

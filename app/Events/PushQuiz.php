@@ -14,24 +14,18 @@ class PushQuiz implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $roomId;
-    // public $quest;
-    // public $detailQuestion;
+    public $quest;
+    public $detailQuestion;
 
-    public function __construct($roomId)
+    public function __construct($quest,$detailQuestion)
     {
-        // $this->roomId           = $roomId;
-        // $this->quest            = $quest;
-        // $this->detailQuestion   = $detailQuestion;
+        $this->quest            = $quest;
+        $this->detailQuestion   = $detailQuestion;
     }
 
     public function broadcastOn()
     {
-        return new Channel('room');
+        return new Channel('quiz');
     }
 
-    public function broadcastAs()
-    {
-        return "room.stream";
-    }
 }

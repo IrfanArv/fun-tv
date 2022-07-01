@@ -62,40 +62,4 @@ class MainController extends Controller
         return response()->json(['success' => true]);
     }
 
-
-    public function watch(Request $request)
-    {
-
-        $roomId = $request->stream;
-
-        $rooms = Room::where('stream_key', '=', $roomId)->firstOrFail();
-        // dd($rooms);
-        $nameRoom = $rooms->name;
-        $streamKey = $rooms->stream_key;
-        if ($rooms != null) {
-            return view('pages.main.room', compact('rooms', 'nameRoom', 'streamKey'));
-        } else {
-            return redirect('')->with('error', 'Streaming room not found');
-        }
-    }
-
-    public function getRoom()
-    {
-        $sanctumUser = auth('sanctum')->user();
-        $RoomPlayers = $sanctumUser->room_id;
-        $rooms = Room::find($RoomPlayers);
-        if ($rooms == NULL) {
-            return response([
-                'success'   => false,
-                'message' => ['Room identity not found']
-            ], 201);
-        }
-        $response = [
-            'success'        => true,
-            'room_name'      => $rooms->name,
-            'stream_key'     => $rooms->stream_key
-        ];
-
-        return response($response, 200);
-    }
 }

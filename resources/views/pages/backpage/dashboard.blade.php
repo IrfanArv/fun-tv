@@ -180,13 +180,6 @@
     </div>
 
     <script type="text/javascript">
-        $('document').ready(function() {
-            // var waktu_quiz = localStorage.getItem("waktu_quiz_active");
-            // var quiz_jalan = localStorage.getItem("quiz_jalan");
-            // var app = @json($room);
-            // console.log(app);
-
-        });
 
         var SITEURL = '{{ URL::to('') }}';
 

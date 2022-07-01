@@ -3,24 +3,34 @@
 use App\Events\PushQuiz;
 use Illuminate\Support\Facades\Route;
 
-
+// auth
 Route::get('players/login', 'Auth\PlayerAuthController@getLogin')->name('players.login');
 Route::post('players/login', 'Auth\PlayerAuthController@postLogin');
 Route::post('players/logout', 'Auth\PlayerAuthController@postLogout')->name('players.logout');
 Route::get('players/register', 'Auth\PlayerAuthController@getRegister')->name('players.register');
 Route::post('players/register', 'Auth\PlayerAuthController@postRegister');
+// end auth
 // otp
 Route::get('get-otp', 'Auth\PlayerAuthController@getOTP')->name('players.otp');
 Route::post('get-otp', 'Auth\PlayerAuthController@postOTP');
+// end otp
+// profile
 Route::post('update-profile', 'MainController@updateProfile')->name('players.update');
 Route::post('available-user', 'MainController@user_check');
 Route::post('save-profile', 'MainController@saveProfile');
+// end profile
+// index
 Route::get('/', 'MainController@index')->name('home');
+// question
+Route::get('questions', 'QuestController@index')->name('quest');
+
+
 
 // Route::middleware('auth:players')->group(function(){
 //     Route::get('/watch', 'MainController@watch');
 // });
 
+// administrator area
 Auth::routes();
 Route::group([
     'name' => 'dashboard.',
