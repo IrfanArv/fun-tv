@@ -117,7 +117,7 @@
                                             name="confirm-password" placeholder="Confirm Password" value="" maxlength="50"
                                             required="">
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                 </div>

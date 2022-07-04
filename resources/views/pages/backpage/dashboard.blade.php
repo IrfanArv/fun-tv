@@ -36,8 +36,8 @@
                                             <div class="col-xl-4 col-md-6 col-sm-6">
                                                 <div class="media p-0">
                                                     <div class="media-body">
-                                                        <h6>Trivia Quiz</h6>
-                                                        <p>{{ $questionTotal }} Questions</p>
+                                                        <h6>Trivia Quiz <a class="mt-3" href="{{ route('quiz_by_room',$room->id) }}"><i data-feather="book-open"></i></a></h6>
+                                                        <p>{{ $questionTotal }} Questions </p>
                                                     </div>
                                                 </div>
                                             </div>

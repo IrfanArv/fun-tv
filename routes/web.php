@@ -23,6 +23,9 @@ Route::post('save-profile', 'MainController@saveProfile');
 Route::get('/', 'MainController@index')->name('home');
 // question
 Route::get('questions', 'QuestController@index')->name('quest');
+Route::post('questions', 'QuestController@postAnswer');
+// lead
+Route::get('leadboard', 'QuestController@leadboard');
 
 
 

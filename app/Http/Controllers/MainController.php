@@ -15,9 +15,10 @@ class MainController extends Controller
             $getPlayerPhone     = $request->session()->get('phone_session');
             $getPlayer          = Player::where('phone', '=', $getPlayerPhone)->firstOrFail();
             $playerName         = $getPlayer->username;
+            $playerId           = $getPlayer->id;
             $data = Room::where('status', '=', 1)->firstOrFail();
             $streamKey = $data->stream_key;
-            return view('pages.funtv.home.main', compact('data', 'streamKey','playerName'));
+            return view('pages.funtv.home.main', compact('data', 'streamKey','playerName','playerId'));
         } else {
             return redirect()->route('players.login');
         }

@@ -114,7 +114,7 @@
                         <div class="row mb-2">
                             <div class="col-md-2">
                                 <img class="img-80 rounded-circle" id="modal-preview"
-                                    src="https://via.placeholder.com/150"><br><br>
+                                    src="https://via.placeholder.com/150"><br><br> 
                                 <div class="upload-btn-wrapper">
                                     <button class="btn-upload">Upload file</button>
                                     <input id="image" type="file" name="image" accept="image/*" onchange="readURL(this);">

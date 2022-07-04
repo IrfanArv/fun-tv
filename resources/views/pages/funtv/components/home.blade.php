@@ -1,7 +1,7 @@
 <div class="container border-bottom">
     <div class="row my-3 text-center">
         <div class="col-3">
-            <a class="list-btn" href="javascript:void(0)" id="rank_btn"> <img class="img-fluid"
+            <a class="list-btn" href="javascript:void(0)" onclick="rank_btn()"> <img class="img-fluid"
                     src="{{ asset('funtv/img/rank.svg') }}"></a>
         </div>
         <div class="col-3">
