@@ -8,6 +8,7 @@ use App\Models\Question_details;
 use App\Models\Answers;
 use App\Models\Player;
 use Illuminate\Support\Facades\DB;
+use App\Events\leadboard;
 
 
 class QuestController extends Controller
@@ -56,6 +57,8 @@ class QuestController extends Controller
             'corrected'     => $isCorrect
         ];
         Answers::create($input);
+        $ranking = $this->leadboard();
+        event(new leadboard($ranking));
         $response = [
             'status'        => true
         ];

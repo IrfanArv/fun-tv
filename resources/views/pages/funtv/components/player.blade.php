@@ -1,8 +1,6 @@
 <div class="row no-gutters">
     <div class="col-12 d-flex justify-content-center">
         <div style="position: relative">
-            <a class="full-btn" href="javascript:void(0)" onclick="fullscreen()"> <img class="img-fluid full_logo"
-                    src="{{ asset('funtv/img/max.svg') }}"></a>
         </div>
         <div id="player"></div>
     </div>
@@ -38,7 +36,7 @@
                     enablejsapi: 1,
                     disablekb: 1,
                     showinfo: 0,
-                    controls: 0,
+                    controls: 1,
                     fs: 1,
                 },
                 events: {

@@ -59,7 +59,7 @@
                     $("#quizComponent").hide();
                     $("#answers").html('');
                     $("#checking-answer").hide();
-                }
+                } 
             },
             error: function(data) {
                 console.log('Error:', data);

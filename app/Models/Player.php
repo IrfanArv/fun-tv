@@ -19,8 +19,11 @@ class Player extends Authenticable
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function chat(){
+        return $this->hasMany(Chat::class);
+    }
     protected $fillable = [
-        'name', 'email', 'password', 'trivia_status', 'trivia_score','phone','otp','username','image'
+        'name', 'email', 'password','phone','otp','username','image','bio','gender','brith'
     ];
 
     protected $hidden = [

@@ -9,26 +9,26 @@
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-center text-center mt-1 px-5">
-                <p><span class="sub-greetings">Selamat bergabung, biar makin asik silahkan pasang photo kamu dan buat
+                <p><span class="sub-greetings">Selamat bergabung, biar makin asik silahkan pilih avatar kamu dan buat
                         username dulu ya.</span>
                 </p>
             </div>
             <form id="updatePlayer" name="updatePlayer" class="px-5 mt-2 mb-1" enctype="multipart/form-data">
                 <div class="d-flex justify-content-center">
-                    <img class="img-80 rounded-circle" id="modal-preview" src="{{ asset('funtv/img/ava_default.svg') }}">
+                    <img class="img-80 rounded-circle border border-dark border-2" id="avatarImg" src="{{ asset('funtv/img/ava_default.svg') }}">
                 </div>
                 <div class="d-flex justify-content-center pt-2 pb-3">
                     <div class="upload-btn-wrapper">
-                        <button class="btn btn-upload">Ganti Photo <img class="img-fluid"
-                                src="{{ asset('funtv/img/pencil.svg') }}"></button>
-                        <input id="image" type="file" name="image" accept="image/*" onchange="readURL(this);">
+                        <button id="generateAvatar" type="button" class="btn btn-upload">Pilih Avatar <img
+                                class="img-fluid" src="{{ asset('funtv/img/refresh.svg') }}"></button>
                     </div>
                     <input type="hidden" name="hidden_image" id="hidden_image">
                 </div>
                 <div class="form-row text-center">
                     <div class="form-group col-md-12 px-3">
                         <label class="my-2">Username</label>
-                        <input type="hidden" name="phone" id="phone" value="{{$getPlayerPhone}}">
+                        <input type="hidden" name="phone" id="phone" value="{{ $getPlayerPhone }}">
+                        <input type="hidden" name="avatar" id="avatar">
                         <input type="text" class="form-control form-control-lg mb-3" id="username" name="username"
                             value="" required="">
                         <span id="user_results"></span>
@@ -54,9 +54,19 @@
             @endif
         </div>
     </div>
+
     <script>
+        var ava_default = $("#avatarImg");
         var SITEURL = '{{ URL::to('') }}';
         $(document).ready(function() {
+
+            $("#generateAvatar").click(function() {
+                username = GetUserName();
+                $('#avatarImg').attr('src', 'https://avatars.dicebear.com/api/adventurer/' + username +
+                    '.svg');
+                $('#avatar').val('https://avatars.dicebear.com/api/adventurer/' + username + '.svg')
+            });
+
             $("#sendProfile").attr("disabled", true);
 
             $.ajaxSetup({
@@ -79,7 +89,7 @@
                         success: function(data) {
                             if (data.success === true) {
                                 $("#sendProfile").attr("disabled", false);
-                            }else{
+                            } else {
                                 $("#sendProfile").attr("disabled", true);
                             }
                             $('#user_results').html(data.message);
@@ -92,38 +102,33 @@
             });
 
             $('body').on('submit', '#updatePlayer', function(e) {
-            e.preventDefault();
-            var actionType = $('#sendProfile').val();
-            $('#sendProfile').html('Sending Data..');
-            var formData = new FormData(this);
-            $.ajax({
-                type: 'POST',
-                url: SITEURL + "/save-profile",
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: (data) => {
-                    $('#updatePlayer').trigger("reset");
-                    $('#sendProfile').html('Success');
-                    window.location.href = "{{ route('home')}}";
-                },
+                e.preventDefault();
+                var actionType = $('#sendProfile').val();
+                $('#sendProfile').html('Sending Data..');
+                var formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: SITEURL + "/save-profile",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        $('#updatePlayer').trigger("reset");
+                        $('#sendProfile').html('Success');
+                        window.location.href = "{{ route('home') }}";
+                    },
+                });
             });
         });
-        });
 
+        function GetUserName() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        function readURL(input, id) {
-            id = id || '#modal-preview';
-            if (input.files) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $(id).attr('src', e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-                $('#modal-preview').removeClass('hidden');
-                $('#start').hide();
-            }
+            for (var i = 0; i < 5; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            return text;
         }
     </script>
 @endsection

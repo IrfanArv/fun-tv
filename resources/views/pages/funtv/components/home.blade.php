@@ -5,11 +5,15 @@
                     src="{{ asset('funtv/img/rank.svg') }}"></a>
         </div>
         <div class="col-3">
-            <a class="list-btn" href="javascript:void(0)" id="live_chat_btn"> <img class="img-fluid"
-                    src="{{ asset('funtv/img/live_chat.svg') }}"></a>
+            <a class="list-btn position-relative" href="javascript:void(0)" onclick="live_chat()">
+                <span id="notifChat" class="badge-custom position-absolute translate-middle border border-light rounded-circle" style="display: none">
+                    <span class="visually-hidden">New chats</span>
+                  </span>
+                <img class="img-fluid" src="{{ asset('funtv/img/live_chat.svg') }}">
+            </a>
         </div>
         <div class="col-3">
-            <a class="list-btn" href="javascript:void(0)" id="help_btn"> <img class="img-fluid"
+            <a class="list-btn" href="javascript:void(0)" onclick="help()"> <img class="img-fluid"
                     src="{{ asset('funtv/img/help.svg') }}"></a>
         </div>
         <div class="col-3">
@@ -21,12 +25,12 @@
 <div class="container border-bottom">
     <div class="row my-3">
         <div class="col-4">
-            <div class="viewer-count mt-3 ms-3">
-                630 Viewer
+            <div class="viewer-count mt-3 ms-3" id="listeners">
             </div>
         </div>
         <div class="col-8 align-self-end">
-            <img class="img-fluid" src="{{ asset('funtv/img/ava_list.png') }}">
+            <div class="avatars" onclick="getOnlineUser()">
+            </div>
         </div>
     </div>
 </div>

@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Hash;
 use App\Models\Player;
+use App\Models\LogPlayer;
 use Illuminate\Support\Facades\Auth;
+use App\Events\listenPlayers;
+
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -48,6 +51,7 @@ class PlayerAuthController extends Controller
             'otp' => 443323
         ];
         Player::updateOrCreate(['phone' => $phone], $input);
+
         $request->session()->put('phone_session', $phone);
         return redirect()->route('players.otp');
     }
@@ -61,11 +65,15 @@ class PlayerAuthController extends Controller
         $getPlayerPhone     = $request->session()->get('phone_session');
         $getPlayer          = Player::where('phone', '=', $getPlayerPhone)->firstOrFail();
         $playerOTP          = $getPlayer->otp;
+        $playerId           = $getPlayer->id;
         $playerName         = $getPlayer->username;
 
         $auth_otp = [
-            'phone' => $getPlayerPhone,
+            'player_id' => $getPlayerPhone,
             'otp' => $playerOTP
+        ];
+        $input = [
+            'phone' => $playerId
         ];
 
         if ($otpKey != $playerOTP) {
@@ -78,6 +86,9 @@ class PlayerAuthController extends Controller
             if ($playerName == NULL) {
                 return view('pages.funtv.profile.create',compact('getPlayerPhone'));
             } else {
+                LogPlayer::updateOrCreate(['player_id' => $playerId], $input);
+                $count = LogPlayer::count();
+                event(new listenPlayers($getPlayer, $count));
                 return redirect()->route('home');
             }
         }
@@ -111,9 +122,7 @@ class PlayerAuthController extends Controller
         $input = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
-            'trivia_status' => 0,
-            'trivia_score' => 0
+            'password' => $request->password
         ];
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);

@@ -15,9 +15,10 @@ Route::get('get-otp', 'Auth\PlayerAuthController@getOTP')->name('players.otp');
 Route::post('get-otp', 'Auth\PlayerAuthController@postOTP');
 // end otp
 // profile
-Route::post('update-profile', 'MainController@updateProfile')->name('players.update');
+Route::post('update-profile', 'MainController@updateProfile');
 Route::post('available-user', 'MainController@user_check');
 Route::post('save-profile', 'MainController@saveProfile');
+Route::get('profile', 'MainController@getProfile');
 // end profile
 // index
 Route::get('/', 'MainController@index')->name('home');
@@ -26,7 +27,11 @@ Route::get('questions', 'QuestController@index')->name('quest');
 Route::post('questions', 'QuestController@postAnswer');
 // lead
 Route::get('leadboard', 'QuestController@leadboard');
-
+// conversations
+Route::get('chats', 'ChatController@index');
+Route::post('store-chat', 'ChatController@store');
+// listen player
+Route::get('lister-players', 'MainController@getPlayersActive');
 
 
 // Route::middleware('auth:players')->group(function(){

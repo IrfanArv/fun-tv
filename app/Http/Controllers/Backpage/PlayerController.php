@@ -48,9 +48,7 @@ class PlayerController extends Controller
         $input = [
             'name' => $request->name,
             'email' => $request->email,
-            'password'=> $request->password,
-            'trivia_status'=> 0,
-            'trivia_score'=> 0
+            'password'=> $request->password
         ];
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);

@@ -32,19 +32,20 @@ class Dashboard extends Controller
         $get_time = $quest->time;
         $date_start     = date('Y-m-d H:i:s');
         $date_end       = date('Y-m-d H:i:s', strtotime("+$get_time min"));
-        $getPlayerPhone     = $request->session()->get('phone_session');
-        $getPlayer          = Player::where('phone', '=', $getPlayerPhone)->firstOrFail();
-        $playerId           = $getPlayer->id;
+        // $getPlayerPhone     = $request->session()->get('phone_session');
+        // $getPlayer          = Player::where('phone', '=', $getPlayerPhone)->firstOrFail();
+        // $playerId           = $getPlayer->id;
         $data = [
             'date_start' => $date_start,
             'date_end' => $date_end,
             'status' => 2,
         ];
         $quest->update($data);
-        $playingQuiz        = Answers::where('player_id', '=', $playerId)->where('question_id', '=', $quest->id)->first();
-        if (!$playingQuiz){
-            event(new PushQuiz($quest, $detailQuestion));
-        }
+        // $playingQuiz        = Answers::where('player_id', '=', $playerId)->where('question_id', '=', $quest->id)->first();
+        // if (!$playingQuiz){
+        //     event(new PushQuiz($quest, $detailQuestion));
+        // }
+        event(new PushQuiz($quest, $detailQuestion));
         return response()->json(array(
             'waktu_quiz' => $date_end,
             'status' => TRUE
