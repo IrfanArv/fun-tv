@@ -20,13 +20,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-    public function rooms(){
+    public function rooms()
+    {
         return $this->hasMany(Room::class);
     }
-    public function question(){
+    public function question()
+    {
         return $this->hasMany(Question::class);
     }
-    public function player(){
+    public function player()
+    {
         return $this->hasMany(Room::class);
     }
 
@@ -34,7 +37,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'image'
+        'image',
+        'username',
+        'last_login_ip'
     ];
 
     /**

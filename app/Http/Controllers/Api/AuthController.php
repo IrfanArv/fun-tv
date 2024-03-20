@@ -4,43 +4,46 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Player;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
-class AuthController extends Controller
+
+class AuthController extends BaseController
 {
-    public function index(Request $request)
+    public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $user = Auth::user();
+            $success['token'] = $user->createToken('EDMHUB')->plainTextToken;
+            $success['name'] = $user->name;
 
-        $user = Player::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'success'   => false,
-                'message' => ['These credentials do not match our records.']
-            ], 201);
+            return $this->sendResponse($success, 'User login successfully.');
+        } else {
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised'], 401);
         }
+    }
 
-        $token = $user->createToken('ApiToken')->plainTextToken;
+    public function authUser(Request $request)
+    {
+        $user = User::where('username', $request->username)->first();
 
-        $response = [
-            'success'   => true,
-            'user'      => $user,
-            'token'     => $token
-        ];
-
-        return response($response, 200);
+        if ($user) {
+            if ($request->ip() == $user->last_login_ip) {
+                $token = $user->createToken('MyApp')->plainTextToken;
+                return $this->sendResponse(['token' => $token, 'name' => $user->name], 'User login successful.');
+            } else {
+                return $this->sendError('Unauthorized.', ['error' => 'Unauthorized. IP address mismatch'], 406);
+            }
+        } else {
+            return $this->sendError('Unauthorized.', ['error' => 'Unauthorized. User not found'], 401);
+        }
     }
 
     public function logout()
     {
-        auth()->logout();
-        return response()->json([
-            'success'    => true
-        ], 200);
+        Auth::user()->tokens()->delete();
+        return $this->sendResponse('Success', 'User logout successfully.');
     }
 }
