@@ -61,6 +61,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">User Name</label>
+                                    <div class="col-sm-8">
+                                        {!! Form::text('username', null, ['placeholder' => 'Username', 'class' => 'form-control', 'id' => 'username']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Email</label>
                                     <div class="col-sm-8">
                                         {!! Form::email('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}

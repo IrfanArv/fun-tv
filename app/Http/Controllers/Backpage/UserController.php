@@ -38,6 +38,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'username' => 'required|unique',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
@@ -48,6 +49,7 @@ class UserController extends Controller
             $request->file('image')->move($destinationPath, $imageName);
             $input = [
                 'name' => $request->name,
+                'username' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password,
                 'image' => date('YmdHis') . "." . $request->image->getClientOriginalExtension()
@@ -58,6 +60,7 @@ class UserController extends Controller
         } else {
             $input = [
                 'name' => $request->name,
+                'username' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password
             ];
@@ -117,7 +120,7 @@ class UserController extends Controller
                 'password' => $request->password,
                 'image' => date('YmdHis') . "." . $request->image->getClientOriginalExtension()
             ];
-            if (!empty($input['password'])) {
+            if (!empty ($input['password'])) {
                 $input['password'] = Hash::make($input['password']);
             } else {
                 $input = Arr::except($input, array('password'));
@@ -133,7 +136,7 @@ class UserController extends Controller
                 'password' => $request->password
             ];
 
-            if (!empty($input['password'])) {
+            if (!empty ($input['password'])) {
                 $input['password'] = Hash::make($input['password']);
             } else {
                 $input = Arr::except($input, array('password'));
