@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'players',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
     ],
 
     'providers' => [
